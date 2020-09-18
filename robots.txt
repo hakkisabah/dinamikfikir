@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /content/
+Allow: /profile/
+Disallow: /users/login/
+Disallow: /users/register/
+Disallow: /users/forgot/
+Disallow: /dashboard/
+Disallow: /index.php
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: */feed/
+Disallow: */trackback/
