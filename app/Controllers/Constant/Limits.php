@@ -24,7 +24,7 @@ class Limits
     public function __construct()
     {
         $this->reportLimit = 50;
-        $this->queryLimit = '10,0';
+        $this->queryLimit = 10;
         $this->emailMin = 6;
         $this->emailMax = 50;
         $this->passMin = 8;
