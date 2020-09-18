@@ -18,10 +18,10 @@ Mental olarak özgüvenimi pozitif olarak etkileyen  [Bülent BATMAZ](https://ak
 [Jump Section 2](#section-2)
 
 ##
-#Section 1
+# Section 1
                       
 
-#DinamikFikir CMS nedir / [Kurulum ve Kullanım Özet Video](https://youtu.be/0nQdQ6IcrrI)
+# DinamikFikir CMS nedir / [Kurulum ve Kullanım Özet Video](https://youtu.be/0nQdQ6IcrrI)
 
 DinamikFikir CMS çevik yaklaşımlarıyla basit bir içerik yönetim sistemidir, 
 asıl amacı kullanılan yer sağlayıcının fiziksel alan kullanımını minimuma indirmek ve 
@@ -64,7 +64,7 @@ Ek olarak, PHP'nizde aşağıdaki uzantıların etkinleştirildiğinden emin olu
 ##
 # [Section 2](#section-2)
 
-#What is DinamikFikir CMS / [Installation and Usage Summary Video](https://youtu.be/0nQdQ6IcrrI)
+# What is the DinamikFikir CMS / [Installation and Usage Summary Video](https://youtu.be/0nQdQ6IcrrI)
 
 
 DinamikFikir CMS is a simple content management system with agile approaches,
@@ -93,7 +93,7 @@ offers useful features .._**
 #### Download with git or download zip or [DinamikFikir CDN](https://cdn.dinamikfikir.com/public/uploads/dinamikfikirLatest.zip)
 
 ##### Required
--Run on your server and start installation (etc. enter localhost on your browser) and enter required.
+- Run on your server and start installation (etc. enter localhost on your browser) and enter required.
 ![SetupIndex](https://cdn.dinamikfikir.com/public/uploads/Installation/1-2-DF-Setup-Database.jpg)
 
 ![SetupIndex](https://cdn.dinamikfikir.com/public/uploads/Installation/1-DF-Database-Setup-Success.jpg)
