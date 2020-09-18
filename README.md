@@ -34,7 +34,7 @@ Bu özelliği hiç bir kod bilgisi gerektirmeden kurulum aşamasında ;
 - Veritabanı hesap bilgileri ve Yönetici Hesabı oluşturma (Zorunlu)
 - SMTP kullanıcı bilgileri (İsteğe bağlı)
 - Google Captcha Anahtarları (İsteğe bağlı)
-- AWS S3 Anahtarları (İsteğe bağlı)
+- AWS Erişim Anahtarları (İsteğe bağlı)
 
 girişlerini yaparak sade ve etkili editör ile birlikte içerik yönetim sistemini kullanmaya başlayabilirsiniz.
 
@@ -78,7 +78,7 @@ This feature does not require any code knowledge during the installation phase;
 - Database account information and creating an Administrator Account (Required)
 - SMTP user information (Optional)
 - Google Captcha Keys (Optional)
-- AWS S3 Keys (Optional)
+- AWS Access Keys (Optional)
 
 -- This link may be useful if you do not know about AWS keys => [Create AWS Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#Using_CreateAccessKey)
 
@@ -140,7 +140,7 @@ offers useful features .._**
 - The main purpose of this system is to reduce the load on your hosting provider and provide a faster system.
 
 - **There is a very important issue that; After installation, you need to choose Local or AWS from your Admin Panel. If you change the location after the content is started to be entered, the system will start to transfer all the images at the first content viewing to the selected location. This may cause your system to run unstable depending on resource availability.** 
-- **As a recommendation,** obtaining S3 keys before system installation and introducing them to the DinamikFikir system before actively using the system will cause you to take much more stable steps for the future.
+- **As a recommendation,** obtaining access keys before system installation and introducing them to the DinamikFikir system before actively using the system will cause you to take much more stable steps for the future.
 
 ### Develop DinamikFikir
 
