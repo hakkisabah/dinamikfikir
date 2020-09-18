@@ -1,11 +1,12 @@
 
-                                                                ___ _                       _ _      ___ _ _    _          ___         __    
-                                                               /   (_)_ __   __ _ _ __ ___ (_) | __ / __(_) | _(_)_ __    / __\ /\/\  / _\   
-                                                              / /\ / | '_ \ / _` | '_ ` _ \| | |/ // _\ | | |/ / | '__|  / /   /    \ \ \    
-                                                             / /_//| | | | | (_| | | | | | | |   </ /   | |   <| | |    / /___/ /\/\ \_\ \   
-                                                            /___,' |_|_| |_|\__,_|_| |_| |_|_|_|\_\/    |_|_|\_\_|_|    \____/\/    \/\__/   
-                                                                                                                                             
-                                                            _`~~generate from http://www.network-science.de/ascii/ and using ogre font~~`_
+
+             ___ _                       _ _      ___ _ _    _          ___         __    
+            /   (_)_ __   __ _ _ __ ___ (_) | __ / __(_) | _(_)_ __    / __\ /\/\  / _\   
+           / /\ / | '_ \ / _` | '_ ` _ \| | |/ // _\ | | |/ / | '__|  / /   /    \ \ \    
+          / /_//| | | | | (_| | | | | | | |   </ /   | |   <| | |    / /___/ /\/\ \_\ \   
+         /___,' |_|_| |_|\__,_|_| |_| |_|_|_|\_\/    |_|_|\_\_|_|    \____/\/    \/\__/ 
+                                                                                 
+         _`~~generate from http://www.network-science.de/ascii/ and using ogre font~~`_
                                               
 note: the introduction will be in Turkish and English, you can read the explanations in English in section 2.
 # Teşekkürler
@@ -17,7 +18,7 @@ Mental olarak özgüvenimi pozitif olarak etkileyen  [Bülent BATMAZ](https://ak
 [Jump Section 2](#section-2)
 
 ##
-- #Section 1
+#Section 1
                       
 
 #DinamikFikir CMS nedir / [Kurulum ve Kullanım Özet Video](https://youtu.be/0nQdQ6IcrrI)
@@ -61,7 +62,7 @@ Ek olarak, PHP'nizde aşağıdaki uzantıların etkinleştirildiğinden emin olu
 
 
 ##
-- #Section 2
+#Section 2
 
 #What is DinamikFikir CMS / [Installation and Usage Summary Video](https://youtu.be/0nQdQ6IcrrI)
 
