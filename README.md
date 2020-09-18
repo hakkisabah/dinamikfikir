@@ -62,7 +62,7 @@ Ek olarak, PHP'nizde aşağıdaki uzantıların etkinleştirildiğinden emin olu
 
 
 ##
-#Section 2
+# [Section 2](#section-2)
 
 #What is DinamikFikir CMS / [Installation and Usage Summary Video](https://youtu.be/0nQdQ6IcrrI)
 
