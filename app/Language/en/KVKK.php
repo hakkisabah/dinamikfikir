@@ -1,7 +1,7 @@
 <?php
 return [
     'dinamikfikirKVKK'=>"
-    <h2>Privacy Policy of <span class='website_url'>" . $_SERVER['REMOTE_ADDR'] . "</span></h2>
+    <h2>Privacy Policy of <span class='website_url'>" . getenv('SITE_NAME') . "</span></h2>
 
 <p>At <span class='website_name'>" . getenv('SITE_NAME') . "</span>, we collect and manage user data according to the following Privacy Policy.</p>
 
@@ -15,7 +15,7 @@ return [
 
 <h3>Use of the Data</h3>
 
-<p>We only use your personal information to provide you the <span class='website_name'>Dinamikfikir</span> services or to communicate with you about the Website or the services.</p>
+<p>We only use your personal information to provide you the <span class='website_name'>" . getenv('SITE_NAME') . "</span> services or to communicate with you about the Website or the services.</p>
 
 <p>We employ industry standard techniques to protect against unauthorized access of data about you that we store, including personal information.</p>
 

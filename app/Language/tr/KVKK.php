@@ -1,7 +1,7 @@
 <?php
 return [
-  'dinamikfikirKVKK'=>'
-  <h2> <span class = "website_url"> ' . $_SERVER['REMOTE_ADDR'] . ' </span> Gizlilik Politikası </h2>
+    'dinamikfikirKVKK'=>'
+  <h2> <span class = "website_url"> ' . getenv('SITE_NAME') . ' </span> Gizlilik Politikası </h2>
 
 <p> <span class = "website_name">' . getenv('SITE_NAME') . '</span> \'de, kullanıcı verilerini aşağıdaki Gizlilik Politikasına göre topluyor ve yönetiyoruz. </p>
 
@@ -15,7 +15,7 @@ return [
 
 <h3> Verilerin Kullanımı </h3>
 
-<p> Kişisel bilgilerinizi yalnızca size <span class = "website_name"> Dinamikfikir </span> hizmetlerini sunmak veya Web Sitesi veya hizmetler hakkında sizinle iletişim kurmak için kullanırız. </p>
+<p> Kişisel bilgilerinizi yalnızca size <span class = "website_name"> ' . getenv('SITE_NAME') . ' </span> hizmetlerini sunmak veya Web Sitesi veya hizmetler hakkında sizinle iletişim kurmak için kullanırız. </p>
 
 <p> Kişisel bilgiler dahil olmak üzere, hakkınızda sakladığımız verilere yetkisiz erişime karşı koruma sağlamak için endüstri standardı teknikler kullanıyoruz. </p>
 
