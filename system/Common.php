@@ -614,6 +614,21 @@ if (!function_exists('lang')) {
      *
      * @return string
      */
+    // Added by Hakkı SABAH
+    function langFinder($supportedLang){
+        $request = service('request');
+        $doubleComma = explode(';',$request->getHeader('Accept-Language')->getValueLine());
+
+        $singleComma = !empty($doubleComma[0])?explode(',',$doubleComma[0]):'';
+        if (!empty($singleComma[0]) && array_search($singleComma[0], $supportedLang) !== false){
+            return $singleComma[0];
+        }elseif (!empty($singleComma[1]) && array_search($singleComma[1], $supportedLang) !== false){
+            return $singleComma[1];
+        }else{
+            return false;
+        }
+    }
+    // Added by Hakkı SABAH END
     function lang(string $line, array $args = [], string $locale = null)
     {
         //** Added by Hakkı SABAH
@@ -622,11 +637,15 @@ if (!function_exists('lang')) {
         $conf = new App();
         helper('cookie');
         $lg = get_cookie('df_lang', true);
-        $findedLocale = array_search($lg, $conf->supportedLocales);
-        if ($findedLocale !== false) {
+        $langFinder = langFinder($conf->supportedLocales);
+        if (!empty($lg)){
             $locale = $lg;
-        } else {
-            $locale = 'en';
+        }else{
+            if (!empty($langFinder)){
+                $locale = $langFinder;
+            } else{
+                $locale = 'en';
+            }
         }
         //** Added by Hakkı SABAH END
         //
