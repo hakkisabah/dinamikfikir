@@ -1,5 +1,12 @@
 <script type="application/ld+json">
-    <?php if (!empty($header)) {
+    <?php
+    $titleComma ='';
+    if (!empty($header['content_images']) && count($header['content_images']) > 0 && empty($header['content_images'][0])){
+        $titleComma ='"';
+    }else{
+        $titleComma ='",';
+    }
+    if (!empty($header)) {
         echo '{
         "@context": "https://schema.org",
         "@type": "Article",
@@ -9,7 +16,7 @@
       },
       "headline": "' . $header['content_title'] . '",
       "image": [
-      "' . $header['currentImagePathForSEO'] . $header['content_title_image'] . '",'."\n";
+      "' . $header['currentImagePathForSEO'] . $header['content_title_image'] . $titleComma."\n";
         if (!empty($header['content_images'])) {
             $total = count($header['content_images']) - 1;
             foreach ($header['content_images'] as $key => $value) {
