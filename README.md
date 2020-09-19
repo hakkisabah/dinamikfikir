@@ -90,8 +90,6 @@ offers useful features .._**
 ## Installation
 # NOTE : if you are using Cachewall or similar system then turn it off for this system
 
-#### Download with git or download zip or [DinamikFikir CDN](https://cdn.dinamikfikir.com/public/uploads/dinamikfikirLatest.zip)
-
 ##### Required
 - Run on your server and start installation (etc. enter localhost on your browser) and enter required.
 ![SetupIndex](https://cdn.dinamikfikir.com/public/uploads/Installation/1-2-DF-Setup-Database.jpg)
