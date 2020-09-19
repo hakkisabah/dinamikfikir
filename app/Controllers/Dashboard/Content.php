@@ -31,20 +31,32 @@ class Content implements Contents
     }
 
     /**
-     * @param object $request
+     * @param $contentImages
+     * @param $content
      * @return bool
-     * @throws \ReflectionException
      */
+    private function lastContentImagesChecker($contentImages,$content)
+    {
+        foreach ($contentImages as $key => $value){
+            preg_match_all('/'.$value.'/i', $content, $match);
+            if (empty($match[0])) {
+                unset($contentImages[$key]);
+            }
+        }
+        return implode(',',$contentImages);
+    }
+
     public function setContent(object $request)
     {
-
         $titleImageName = '';
         $editorImages = '';
+        if (!empty($request->getVar('editorImagesHidden'))){
+            $editorImages = $this->lastContentImagesChecker(explode(',',$request->getVar('editorImagesHidden')),$request->getVar('contentHiddenForDiv'));
+        }
         try {
             $imageLogic = new ImageLogic();
             $images = $imageLogic->checkAndCopyImage();
             $titleImageName = $images['titleImageNameHere'];
-            $editorImages = $images['editorImageNamesHere'] ? implode(",", $images['editorImageNamesHere']) : '';
         } catch (ReflectionException $e) {
 
         }
@@ -127,9 +139,9 @@ class Content implements Contents
          *
          * */
 
+        $newData['content_images'] = $this->lastContentImagesChecker(explode(',',$request->getVar('editorImagesHidden')),$newData['content']);
         $newData['is_local_image'] = $currentContent['is_local_image'] == getenv('UPLOAD_LOCATION') ? $currentContent['is_local_image'] : getenv('UPLOAD_LOCATION');
         $newData['title_image'] = !empty($tempImageForSaving['titleImageNameHere']) ? $tempImageForSaving['titleImageNameHere'] : $currentContent['title_image'];
-        $newData['content_images'] = $request->getVar('editorImagesHidden');
 
         $data['result'] = $this->finishUpdate($currentContent, $newData);
         unset($imageLogic);
