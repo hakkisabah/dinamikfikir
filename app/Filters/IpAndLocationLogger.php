@@ -34,7 +34,7 @@ class IpAndLocationLogger implements FilterInterface
         if ($agent->isBrowser()) {
             $currentAgent = 'Browser ' . $agent->getBrowser() . ' ' . $agent->getVersion();
         } elseif ($agent->isRobot()) {
-            $currentAgent = 'Robot ' . $agent->robot();
+            $currentAgent = 'Robot ' . $agent->getRobot();
         } elseif ($agent->isMobile()) {
             $currentAgent = 'Mobile ' . $agent->getMobile();
         } else {
