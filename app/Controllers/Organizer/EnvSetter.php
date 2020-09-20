@@ -39,7 +39,12 @@ class EnvSetter
                     }
                 }
             }
-            file_put_contents($fileName, $env);
+            try {
+                file_put_contents($fileName, $env);
+            }catch (\Exception $e){
+                echo "PERMISSON FAILED 2 ! (FROM EnvSetter.php)";
+                exit();
+            }
             return true;
         }
     }
