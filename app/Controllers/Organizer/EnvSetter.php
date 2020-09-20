@@ -30,7 +30,13 @@ class EnvSetter
             $fileperm = substr(sprintf("%o", fileperms($fileName)), -4);
             if ($chmod !== false){
                 if ($fileperm != 0600) {
-                    chmod($fileName, 0600);
+                    try {
+                        chmod($fileName, 0600);
+                    }catch (\Exception $e){
+                        file_put_contents(getcwd() .'/.env', file_get_contents(getcwd() . '/.env_default'));
+                        echo "PERMISSON FAILED ! (FROM EnvSetter.php)";
+                        throw new \CodeIgniter\Exceptions\ConfigException();
+                    }
                 }
             }
             file_put_contents($fileName, $env);
