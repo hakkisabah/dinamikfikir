@@ -269,7 +269,7 @@ class Content implements Contents
         $double_chars['out'] = array('OE', 'oe', 'AE', 'DH', 'TH', 'ss', 'ae', 'dh', 'th');
         $text = str_replace($double_chars['in'], $double_chars['out'], $string);
         if (empty($text)) {
-            return 'n-a';
+            return false;
         }
 
         return $text;

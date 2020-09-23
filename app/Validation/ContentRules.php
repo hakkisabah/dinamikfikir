@@ -26,6 +26,9 @@ class ContentRules
         // Eğer sahibi tarafından aynı başlığa bir güncelleme yapılıyorsa buna izin verilir
         // Eğer yeni bir başlık farklı bir sahiplik tarafından kullanılıyorsa sonuç false olarak dönecektir
         // Eğer hiç kayıt yoksa işlem için uygun anlamına gelir..
+        if ($sluggedTitle === false){
+            return false;
+        }
         if ($isSlug != false) {
             if (
                 $isSlug['user_id'] == session()->get('userInfo')['user_id']

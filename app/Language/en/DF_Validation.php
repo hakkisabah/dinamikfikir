@@ -47,7 +47,7 @@ return [
         'alpha_numeric_user_name' => 'Your username should only consist of letters and numbers, no spaces and only English characters',
         'checkSuspended' => 'Your account has been suspended, please contact system administrators ..',
 
-        'validateContentSlug' => 'This title has already been used. Try a different title.',
+        'validateContentSlug' => 'This title is not available, please enter a legible and not previously used title.',
         'valid_user_email' => 'Please use a valid email address',
         'validateUser' => 'Email or username does not match',
         'valideComment' => 'Do not use any html tags for security reasons ..',

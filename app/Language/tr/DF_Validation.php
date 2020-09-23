@@ -46,7 +46,7 @@ return [
         'alpha_numeric_user_name'=>'Kullanıcı adınız sadece harf ve rakam içermeli, boşluk ve türkçe karakterler(ğ,ı,ö,ü,ç,ş gibi..) içermemeli',
         'checkSuspended' => 'Hesabınız dondurulmuştur, sistem yöneticileri ile irtibata geçiniz..',
 
-        'validateContentSlug' => 'Bu başlık daha önceden kullanılmış. Farklı bir başlık kullanın.',
+        'validateContentSlug' => 'Bu başlık uygun değil, lütfen okunabilir ve daha önceden kullanılmamış bir başık giriniz.',
         'valid_user_email' =>'Lütfen geçerli bir eposta adresi kullanınız',
         'validateUser' => 'Email veya kullanıcı adı eşleşmiyor',
         'valideComment'=>'Güvenlik gereği herhangi bir html tagı kullanmayınız..',
