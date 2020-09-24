@@ -6,6 +6,7 @@ Disallow: /users/login/
 Disallow: /users/register/
 Disallow: /users/forgot/
 Disallow: /dashboard/
+Disallow: /admin/
 Disallow: /index.php
 Disallow: /*.php$
 Disallow: /*.js$

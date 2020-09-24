@@ -45,6 +45,11 @@ gibi bir çok kullanışlı özellik sunmaktadır.._**
 
 Daha fazla geliştirme ve kurulum bilgileri için [DinamikFikir Başlangıç](https://dinamikfikir.com/content/baslangic) adresini ziyaret edebilirsiniz.
 
+app\Controllers\YourController\Controller.php dosyasını kullanıp sistemi daha iyi anlayabilirsiniz.
+Kendi kontrollerinizi deneyebilmek için app\Config\Routes.php dosyasının içinde // Developing ile başlayan yorum satırlarını kaldırmanız gerekmektedir.
+
+Ayrıca [Dinamikfikir Cms Twitter](https://twitter.com/dinamikfikir) bağlantısından güncel commitleri takip edebilir kendinizi geliştirebilirsiniz.
+
 ## Sunucu gereksinimleri
 
 
@@ -144,6 +149,8 @@ offers useful features .._**
 
 Open app\Controllers\YourController\Controller.php and 
 remove comment tags on app\Config\Routes.php // Developing line , you will see this , so good starting for developing
+
+and you can follow all commits from [Dinamikfikir Cms Twitter](https://twitter.com/dinamikfikir)
 
 ## Server requirements
 
