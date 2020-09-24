@@ -32,6 +32,18 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'View\Page::home'/*,['filter' => 'indexdataupdater']*/);
 
+/*
+ * SEO
+ */
+$routes->get('sitemap\.xml','Organizer\Sitemap::groupContentDateForSiteMap');
+$routes->group('sitemap',function ($routes){
+    $routes->get('(:num)\.xml','Organizer\Sitemap::getGroupedMonthFromRequest/$1');
+});
+
+/*
+ * SEO END
+ */
+
 // Developing
 // If you learn and develop this may be first removed this comment line
 //$routes->group('yourcontroller',function ($routes){

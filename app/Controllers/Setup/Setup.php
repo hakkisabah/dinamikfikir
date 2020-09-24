@@ -124,6 +124,7 @@ class Setup extends RequestForSetup
     {
 
         (new ForgeMaster($forge));
+        file_put_contents('robots.txt',$this->robotsFileString());
         return true;
 
     }
@@ -235,5 +236,25 @@ class Setup extends RequestForSetup
             return ['worked' => 0];
         }
 
+    }
+
+    private function robotsFileString()
+    {
+        return 'User-agent: *
+Allow: /
+Allow: /content/
+Allow: /profile/
+Disallow: /users/login/
+Disallow: /users/register/
+Disallow: /users/forgot/
+Disallow: /dashboard/
+Disallow: /admin/
+Disallow: /index.php
+Disallow: /*.php$
+Disallow: /*.js$
+Disallow: /*.css$
+Disallow: */feed/
+Disallow: */trackback/
+Sitemap : '. base_url().'/sitemap.xml';
     }
 }

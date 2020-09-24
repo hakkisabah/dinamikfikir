@@ -23,6 +23,7 @@ class Filters extends BaseConfig
         'setupdetector' => \App\Filters\setupDetector::class,
         'localization' => \App\Filters\Localization::class,
         'locationtimer' => \App\Filters\LocationTimer::class,
+        'xmlchecker' => \App\Filters\XMLChecker::class,
     ];
 
     // Always applied before every request
@@ -46,6 +47,12 @@ class Filters extends BaseConfig
     // that they should run on, like:
     //    'isLoggedIn' => ['before' => ['account/*', 'profiles/*']],
     public $filters = [
+        'xmlchecker'=>[
+            'before'=>[
+                'sitemap.xml',
+                'sitemap/year/*',
+            ]
+        ],
         'locationtimer'=>[
             'before'=>[
                 'dashboard/editor',
