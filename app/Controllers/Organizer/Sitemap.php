@@ -106,22 +106,35 @@ class Sitemap extends BaseController
         $this->response->setHeader('Content-Type',"application/xml; charset=UTF-8");
     }
 
+    private function mapResolver($result)
+    {
+        if (!empty($result)){
+            foreach ($result as $key => $value){
+                if (empty($value['lastmod'])){
+                    $result[$key]['lastmod'] = $value['created_at'];
+                }
+                unset($result[$key]['created_at']);
+            }
+            return $result;
+        }else{
+            $result['slug'] = 'No content';
+            $result['lastmod'] = 'No modification';
+            return $result;
+        }
+    }
     // sitemap.xml de içeriklerin yıla göre dağılımını oluşturuyoruz.
     public function groupContentDateForSiteMap($yearOrMonth = 'YEAR')
     {
         $db = db_connect();
         $Content = $db->table('contents');
         $result =  $Content
-            ->select(['slug as loc','created_at as lastmod'])
-            ->orderBy('YEAR(`created_at`)', 'DESC')
+            ->select(['slug as loc','updated_at as lastmod','created_at'])
+            ->orderBy('YEAR(`updated_at`)', 'DESC')
             ->groupBy($yearOrMonth . '(`created_at`)')
             ->get($this->queryLimitsOrganizer->sitemapLimit)
             ->getResultArray();
         $db->close();
-        if (empty($result)) {
-            $result['slug'] = 'No content';
-            $result['lastmod'] = 'No modification';
-        }
+        $result = $this->mapResolver($result);
         $XMLOutput = $this->XMLGenerator();
         $this->XMLLooper($result, $XMLOutput,$yearOrMonth);
         return $XMLOutput->asXML();
@@ -133,13 +146,14 @@ class Sitemap extends BaseController
         $db = db_connect();
         $Content = $db->table('contents');
         $result =  $Content
-            ->select(['slug as loc','created_at as lastmod'])
-            ->where('YEAR(`created_at`)',$year)
-            ->orderBy('MONTH(`created_at`)', 'DESC')
+            ->select(['slug as loc','updated_at as lastmod','created_at'])
+            ->where('YEAR(`updated_at`)',$year)
+            ->orderBy('MONTH(`updated_at`)', 'DESC')
             ->get($this->queryLimitsOrganizer->sitemapLimit)
             ->getResultArray();
         $db->close();
-        if (empty($result)) {
+        $result = $this->mapResolver($result);
+        if ($result['slug'] === 'No content') {
             throw PageNotFoundException::forPageNotFound();
         }
         $XMLOutput = $this->XMLGenerator(false);

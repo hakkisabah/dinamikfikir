@@ -11,15 +11,10 @@ class XMLChecker implements FilterInterface
     {
         // Do something here
         $paths = explode('/',$request->uri->getPath());
-        if ($paths[0] == 'sitemap' && $paths[1] == 'year' && empty($paths[3])){
-            if (strip_tags($paths[2]) != $paths[2]){
+        if ($paths[0] == 'sitemap' && !empty($paths[1])){
+            $truePath = explode('.',$paths[1]);
+            if (strip_tags($truePath[0]) != $truePath[0]){
                 throw PageNotFoundException::forPageNotFound();
-            }
-        }
-        if ($paths[0] == 'sitemap' && $paths[1] == 'year' && !empty($paths[2]) && $paths[3] == 'month' && !empty($paths[4])){
-          $month = explode('.',$paths[4]);
-          if (!empty($month[0]) && strlen($month[0]) > 2){
-              throw PageNotFoundException::forPageNotFound();
             }
         }
 
