@@ -64,4 +64,4 @@ typings/
 .cache-loader/
 
 # Distribution files
-dist/**/*.map
+#dist/**/*.map
