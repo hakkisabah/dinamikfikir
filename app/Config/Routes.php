@@ -37,7 +37,7 @@ $routes->get('/', 'View\Page::home'/*,['filter' => 'indexdataupdater']*/);
  */
 $routes->get('sitemap\.xml','Organizer\Sitemap::groupContentDateForSiteMap');
 $routes->group('sitemap',function ($routes){
-    $routes->get('(:num)\.xml','Organizer\Sitemap::getGroupedMonthFromRequest/$1');
+    $routes->get('(:num)\-(:num)\.xml','Organizer\Sitemap::getGroupedMonthFromRequest/$1/$2');
 });
 
 /*

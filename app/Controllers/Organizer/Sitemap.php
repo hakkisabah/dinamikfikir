@@ -30,8 +30,7 @@ class Sitemap extends BaseController
 
         // SimpleXML is installed but default
         // but best to check, and then provide a fallback.
-        if (! extension_loaded('simplexml'))
-        {
+        if (!extension_loaded('simplexml')) {
             // never thrown in travis-ci
             // @codeCoverageIgnoreStart
             throw FormatException::forMissingExtension();
@@ -43,8 +42,8 @@ class Sitemap extends BaseController
                 xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
              http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd"></sitemapindex>
              ';
-        if ($index === false){
-            $XML ='<?xml version="1.0" encoding="UTF-8"?>
+        if ($index === false) {
+            $XML = '<?xml version="1.0" encoding="UTF-8"?>
             <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
                 xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
@@ -68,96 +67,163 @@ class Sitemap extends BaseController
      * @param bool $isUrl
      */
 
-    private function XMLLooper($data,&$XMLOutput,$yearOrMonth ='',$isUrl=false)
+    private function XMLLooper($data, &$XMLOutput, $yearOrMonth = '', $isUrl = false)
     {
-        foreach ($data as $key => $value)
-        {
-            if (is_array($value))
-            {
-                if (! is_numeric($key))
-                {
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                if (!is_numeric($key) && $key != 'created_at') {
                     $subnode = $XMLOutput->addChild("$key");
-                    $this->XMLLooper($value, $subnode,$yearOrMonth);
+                    $this->XMLLooper($value, $subnode, $yearOrMonth);
+                } else {
+                    $subnode = $XMLOutput->addChild($isUrl === false ? "sitemap" : "url");
+                    $this->XMLLooper($value, $subnode, $yearOrMonth);
                 }
-                else
-                {
-                    $subnode = $XMLOutput->addChild($isUrl===false?"sitemap":"url");
-                    $this->XMLLooper($value, $subnode,$yearOrMonth);
-                }
-            }
-            else
-            {
-                if ($key == 'lastmod'){
-                    $date = new \DateTime($data['lastmod']);
-                    $value = $date->format('c');
-                }
-                $betweenWay ='';
-                if ($key == 'loc'){
-                    if ($yearOrMonth == 'YEAR'){
-                        $betweenWay = '/sitemap/' . explode('-',$data['lastmod'])[0] . '.xml';
-                    }else{
-                        $betweenWay = '/content/' . $value;
+            } else {
+                if (!empty($data['loc']) && $data['loc'] != 'No content') {
+                    if ($key == 'lastmod') {
+                        $date = new \DateTime($data['lastmod']);
+                        $value = $date->format('c');
                     }
+                    $betweenWay = '';
+                    if ($key == 'loc') {
+                        if ($yearOrMonth == 'YEAR') {
+                            $betweenWay = '/sitemap/' . explode('-', $data['created_at'])[0] . '-' . explode('-', $data['created_at'])[1] . '.xml';
+                            unset($data['created_at']);
+                        } else {
+                            $betweenWay = '/content/' . $value;
+                        }
+                    }
+                    if ($key != 'created_at') {
+                        $XMLOutput->addChild("$key", htmlspecialchars($key == 'loc' ? base_url() . $betweenWay : "$value"));
+                    }
+                } else {
+                    exit();
                 }
-                $XMLOutput->addChild("$key", htmlspecialchars($key=='loc'? base_url() . $betweenWay:"$value"));
             }
         }
         // Görüntüleme başlığımızın xml olduğunu bildiriyoruz.
-        $this->response->setHeader('Content-Type',"application/xml; charset=UTF-8");
+        $this->response->setHeader('Content-Type', "application/xml; charset=UTF-8");
     }
 
-    private function mapResolver($result)
+    private function mapResolver($result, $isUrl = false)
     {
-        if (!empty($result)){
-            foreach ($result as $key => $value){
-                if (empty($value['lastmod'])){
+        $cleanData = [];
+        if (!empty($result) && $isUrl === false) {
+            foreach ($result as $key => $value) {
+                foreach ($value as $subKey => $subValue) {
+                    $cleanData[$key . $subKey]['created_at'] = $key . '-' . $subKey;
+                    $cleanData[$key . $subKey]['loc'] = $subValue['loc'];
+                    $cleanData[$key . $subKey]['lastmod'] = !empty($subValue['lastmod']) ? $subValue['lastmod'] : $subValue['created_at'];
+
+                }
+            }
+            return $cleanData;
+        } elseif (!empty($result)) {
+            foreach ($result as $key => $value) {
+                if (empty($value['lastmod'])) {
                     $result[$key]['lastmod'] = $value['created_at'];
                 }
-                unset($result[$key]['created_at']);
             }
             return $result;
-        }else{
-            $result['slug'] = 'No content';
+        } else {
+            $result['loc'] = 'No content';
             $result['lastmod'] = 'No modification';
             return $result;
         }
     }
+
+    private function yearWithMonths($createdAtYear,$Content)
+    {
+        $createdAtYearMonths = [];
+
+        // $createdAtYear dizisinde bulunan yıllara ait içerikleri ay bazında çağırıyoruz
+        // ve ayları azalan şekilde sıralıyoruz..
+        foreach ($createdAtYear as $value) {
+            $tmpVal = $value['createdAt'];
+            $createdAtYearMonths[$tmpVal] = $Content
+                ->select('MONTH(`created_at`) as createdAtMonth')->distinct(true)
+                ->where('YEAR(`created_at`)', $tmpVal)
+                ->orderBy('createdAtMonth', 'DESC')
+                ->getWhere()
+                ->getResultArray();
+        }
+        return $createdAtYearMonths;
+    }
+
+    private function sitemapResult($createdAtYearMonths,$Content)
+    {
+        $sitemapResult = [];
+        foreach ($createdAtYearMonths as $key => $value) {
+            if (is_array($value)) {
+                foreach ($value as $subKey => $subValue) {
+                    $sitemapResult[$key][$subValue['createdAtMonth']] = $Content
+                        ->select(['created_at', 'updated_at as lastmod', 'slug as loc'])->distinct(true)
+                        ->where('YEAR(`created_at`)', $key)
+                        ->where('MONTH(`created_at`)', $subValue['createdAtMonth'])
+                        ->orderBy('created_at', 'DESC')
+                        ->limit(1)
+                        ->getWhere()
+                        ->getResultArray()[0];
+                }
+
+            } else {
+                foreach ($value as $subKey => $subValue) {
+                    $sitemapResult[$key][$value] = $Content
+                        ->select(['created_at,updated_at as lastmod,slug as loc'])->distinct(true)
+                        ->where('YEAR(`created_at`)', $key)
+                        ->where('MONTH(`created_at`)', $value)
+                        ->orderBy('created_at', 'DESC')
+                        ->limit(1)
+                        ->getWhere()
+                        ->getResultArray()[0];
+                }
+            }
+        }
+        return $sitemapResult;
+    }
+
     // sitemap.xml de içeriklerin yıla göre dağılımını oluşturuyoruz.
     public function groupContentDateForSiteMap($yearOrMonth = 'YEAR')
     {
+        // sitemap.xml dataları..
         $db = db_connect();
         $Content = $db->table('contents');
-        $result =  $Content
-            ->select(['slug as loc','updated_at as lastmod','created_at'])
-            ->orderBy('YEAR(`updated_at`)', 'DESC')
-            ->groupBy($yearOrMonth . '(`created_at`)')
+        // İlk olarak içerik tablomuzdan yıl bazında oluşturulma tarihlerini alıyoruz ve bunları azalan miktarda
+        // sıralıyoruz. Sıralanan bilgilerle $createdAtYear değişkeninde bir dizi oluşturuyoruz.
+        $createdAtYear = $Content
+            ->select('YEAR(`created_at`) as createdAt')->distinct(true)
+            ->orderBy('createdAt', 'DESC')
             ->get($this->queryLimitsOrganizer->sitemapLimit)
             ->getResultArray();
+        $createdAtYearMonths = $this->yearWithMonths($createdAtYear,$Content);
+        $sitemapResult = $this->sitemapResult($createdAtYearMonths,$Content);
         $db->close();
-        $result = $this->mapResolver($result);
+        $result = $this->mapResolver($sitemapResult);
         $XMLOutput = $this->XMLGenerator();
-        $this->XMLLooper($result, $XMLOutput,$yearOrMonth);
+        $this->XMLLooper($result, $XMLOutput, $yearOrMonth);
         return $XMLOutput->asXML();
     }
 
-    // Buradaki sıralamada diğerlerinden farklı olarak gruplama yapmıyoruz.
-    public function getGroupedMonthFromRequest(int $year)
+    // Buradaki sıralamada diğerlerinden farklı olarak gruplama yapmıyoruz. Direk seneye bağlı ayın günlerinde paylaşılan
+    // içerikleri gönderiyoruz
+    public function getGroupedMonthFromRequest(int $year, int $month)
     {
         $db = db_connect();
         $Content = $db->table('contents');
-        $result =  $Content
-            ->select(['slug as loc','updated_at as lastmod','created_at'])
-            ->where('YEAR(`updated_at`)',$year)
-            ->orderBy('MONTH(`updated_at`)', 'DESC')
+        $result = $Content
+            ->select(['slug as loc', 'updated_at as lastmod', 'created_at'])
+            ->where('YEAR(`created_at`)', $year)
+            ->where('MONTH(`created_at`)', $month)
+            ->orderBy('lastmod', 'DESC')
             ->get($this->queryLimitsOrganizer->sitemapLimit)
             ->getResultArray();
         $db->close();
-        $result = $this->mapResolver($result);
-        if ($result['slug'] === 'No content') {
+        $result = $this->mapResolver($result, true);
+        if ($result['loc'] === 'No content') {
             throw PageNotFoundException::forPageNotFound();
         }
         $XMLOutput = $this->XMLGenerator(false);
-        $this->XMLLooper($result, $XMLOutput,'',true);
+        $this->XMLLooper($result, $XMLOutput, '', true);
         return $XMLOutput->asXML();
     }
 }

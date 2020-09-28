@@ -625,6 +625,8 @@ if (!function_exists('lang')) {
         }elseif (!empty($singleComma[1]) && array_search($singleComma[1], $supportedLang) !== false){
             return $singleComma[1];
         }else{
+            // this log_message seems with getValueLine() together
+            log_message('info','SUSPECT ! FROM => ' . $_SERVER['REMOTE_ADDR']);
             return false;
         }
     }
