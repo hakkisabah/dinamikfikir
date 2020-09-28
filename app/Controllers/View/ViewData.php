@@ -42,7 +42,7 @@ class ViewData extends ViewCreator
             ],
             [
                 // Twitter
-                ['name' => 'twitter:card', 'content' => 'summary'],
+                ['name' => 'twitter:card', 'content' => 'summary_large_image'],
                 ['name' => 'twitter:title', 'content' => $headerData['content_title'] ?? lang('View.header.index.head_metas.default_content_title')],
                 ['name' => 'twitter:description', 'content' => $headerData['description'] ?? lang('View.header.index.head_metas.default_content_description')],
                 ['name' => 'twitter:site', 'content' => '@dinamikfikir'],
