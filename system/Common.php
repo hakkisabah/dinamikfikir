@@ -617,7 +617,10 @@ if (!function_exists('lang')) {
     // Added by Hakkı SABAH
     function langFinder($supportedLang){
         $request = service('request');
-        $doubleComma = explode(';',$request->getHeader('Accept-Language')->getValueLine());
+        $isHeader = $request->getHeader('Accept-Language');
+        if ($isHeader != ''){
+            $doubleComma = explode(';',$isHeader->getValueLine());
+        }
 
         $singleComma = !empty($doubleComma[0])?explode(',',$doubleComma[0]):'';
         if (!empty($singleComma[0]) && array_search($singleComma[0], $supportedLang) !== false){

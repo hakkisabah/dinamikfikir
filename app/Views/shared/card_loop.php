@@ -26,11 +26,11 @@ if (!empty($card_data['userIconAddress'])) {
                                 <p class="card-text text-truncate">' . $value['title'] . '</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button"' . $value['viewButtonLink'] . ' class="btn btn-sm btn-outline-secondary">' . lang('View.shared.card_loop.show') . '</button>';
+                                    <button type="button" ' . $value['viewButtonLink'] . ' class="btn btn-sm btn-outline-secondary">' . lang('View.shared.card_loop.show') . '</button>';
                     if (!empty($value['editable'])) {
                         echo '<button type="button" ' . $value['editButtonLink'] . 'class="btn btn-sm btn-outline-secondary">' . lang('View.shared.card_loop.edit') . '</button>';
                         if (!empty($value['segment']['dashboard'])) {
-                            echo '<button type="button"' . $value['deleteButtonLink'] . 'class="btn btn-sm btn-outline-secondary">' . lang('View.shared.card_loop.delete') . '</button>';
+                            echo '<button type="button" ' . $value['deleteButtonLink'] . 'class="btn btn-sm btn-outline-secondary">' . lang('View.shared.card_loop.delete') . '</button>';
                         }
 
                         echo '</div>

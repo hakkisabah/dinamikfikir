@@ -43,9 +43,10 @@ class ViewCreator extends BaseController
                 // name , property gibi anahtarlara karşılık gelmektedir. Bu anahtarları değişkenleri ile birlikte meta satırına yazdırıyoruz..
                 $prepare .= '<meta ';
                 foreach ($subMeta as $key => $subContent) {
-                    $prepare .= $key . "=\"$subContent\"";
+                    $prepare .= $key . "=\"$subContent\"" . " ";
                 }
-                $prepare .= '>';
+                $prepare .= ' />
+                ';
             }
         }
         return $prepare;
