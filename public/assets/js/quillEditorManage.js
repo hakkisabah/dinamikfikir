@@ -49,7 +49,7 @@ uploadField.onchange = function () {
             })
         }
     } else if (extensionResultHere == 'notValid') {
-        alert("Sadece jpg, jpeg ve png uzantıları yüklenebilir.");
+        alert(errorCallBack('imageExtension'));
     }
 }
 // Editor sayfasından yükleme haricinde ayrılanları tespit etmek için bu değişkene değer atanıyor.

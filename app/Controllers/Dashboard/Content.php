@@ -74,7 +74,7 @@ class Content implements Contents
             $imageLogic = new ImageLogic();
             // içerik yüklendikten sonra herhangi bir lokasyon değişikliği gerçekleşmişse
             // bunu düzeltmek için changeLocationIfDifferent() methodunu işi garantiye almak için çalışıtırıyoruz.
-            $imageLogic->changeLocationIfDifferent($this->getContent('slug', $newData['slug']));
+            $imageLogic->changeLocationIfDifferent($newData);
             unset($imageLogic);
             return true;
         } catch (ReflectionException $e) {
@@ -272,6 +272,7 @@ class Content implements Contents
             return false;
         }
 
+        $text = rtrim($text,'-');
         return $text;
     }
 }

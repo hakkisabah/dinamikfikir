@@ -42,7 +42,7 @@ class UserContent
             ],
             'slug' => [
                 'type' => 'VARCHAR',
-                'constraint' => '40',
+                'constraint' => '50',
                 'null' => FALSE,
             ],
             'content' => [

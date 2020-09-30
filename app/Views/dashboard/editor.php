@@ -141,6 +141,14 @@
             echo $currentBase;
         }?>'
     }
+    function errorCallBack(whichError) {
+        let errors = {
+            imageExtension : "<?php echo lang('DF_Validation.errors.ext_in', ['imageExtensions' => 'jpg,jpeg,png']); ?>",
+            imageSize : "<?php echo lang('DF_Validation.errors.max_size', ['imageSize' => '1mb']); ?>",
+            browserError : "<?php echo lang('View.dashboard.editor.navigatorProblem'); ?>",
+        }
+        return errors[whichError]
+    }
 </script>
 <!-- Include the Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
