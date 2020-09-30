@@ -8,7 +8,8 @@ echo '</main>
                            </div>
                            </footer>';
 echo $footerIndex['script_tag'];
-echo '<!-- Global site tag (gtag.js) - Google Analytics -->
+if ((!empty($footerIndex['uri'][1]) && $footerIndex['uri'][0] != 'admin') || empty($footerIndex['uri'][0])) {
+    echo '<!-- Global site tag (gtag.js) - Google Analytics -->
                       <!--  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171631733-1"></script>-->
                <!--         <script>
                             window.dataLayer = window.dataLayer || [];
@@ -20,9 +21,11 @@ echo '<!-- Global site tag (gtag.js) - Google Analytics -->
                             gtag(\'js\', new Date());
                         
                             gtag(\'config\', \'UA-171631733-1\')
-                        </script>-->
+                        </script>-->';
+}
+
                         
-                        <script>
+                        echo'<script>
                             function requestDynamic(url,payload,cb) {
                                 return axios.post(url, payload)
                                     .then(function (res) {

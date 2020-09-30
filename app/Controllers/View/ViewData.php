@@ -410,7 +410,6 @@ class ViewData extends ViewCreator
             $this->currentBase . 'public/assets/js/ajax/axios_dist_axios.js',
             'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js',
             'https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js',
-            'https://www.googletagmanager.com/gtag/js?id=UA-171631733-1',
         ];
         $data['uri'] = $uri->getSegments();
         unset($uri);
