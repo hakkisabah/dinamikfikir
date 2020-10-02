@@ -1,4 +1,4 @@
-<link href="<?php echo base_url() ?>/public/assets/css/specific/signin.css" rel="stylesheet">
+<link href="<?php echo !empty($loginIndex['signinCss'])?$loginIndex['signinCss']:'notfound-required-signinCss' ?>" rel="stylesheet">
 <?php
 if (!empty($loginIndex)) {
     echo $loginIndex['form_open'];

@@ -282,12 +282,20 @@ class ViewData extends ViewCreator
         $data = [];
     }
 
+    public function forgot_data()
+    {
+        $data['signinCss'] = $this->currentBase . 'public/assets/css/specific/signin.css';
+        $data['loginLogoLink'] = $this->currentBase . 'public/assets/logo/logo.png';
+        return $data;
+
+    }
     public function login_data()
     {
         $data = [];
         $attributes = ['class' => 'form-signin'];
         $data['form_open'] = form_open('/users/islogin', $attributes);
         $data['loginLogoLink'] = $this->currentBase . 'public/assets/logo/logo.png';
+        $data['signinCss'] = $this->currentBase . 'public/assets/css/specific/signin.css';
         $data['inputAndLabel'] = [
             [
                 form_label(lang('View.login.index.mailPlaceHolder'), 'user_email', ['class' => 'sr-only']),

@@ -130,6 +130,7 @@ class ViewCreator extends BaseController
         $data = [];
         $data['form_open'] = $formData['form_open'];
         $data['loginLogoLink'] = $formData['loginLogoLink'];
+        $data['signinCss'] = $formData['signinCss'];
         $completedForm = '';
         foreach ($formData['inputAndLabel'] as $value) {
             if (is_array($value)) {

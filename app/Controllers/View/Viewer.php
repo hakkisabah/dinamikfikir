@@ -95,7 +95,7 @@ class Viewer extends ViewData
     public function forgot($data = [])
     {
         $this->headerIndex();
-//        $data['forgotIndex'] = $this->forgot_data();
+        $data['forgotIndex'] = $this->forgot_data();
         echo view('login/forgot', !empty($data) ? $data : $data = []);
         $this->footerIndex();
     }
