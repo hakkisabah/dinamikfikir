@@ -233,7 +233,7 @@ class ViewData extends ViewCreator
         if (!empty($anyData)) {
             return $this->public_content_looper($anyData);
         }else{
-            throw PageNotFoundException::forPageNotFound($messaga = 'Not Find');
+            throw PageNotFoundException::forPageNotFound($message = 'Not Find');
         }
 
     }

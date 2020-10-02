@@ -118,17 +118,17 @@ class UserRequest extends User
                             session()->setFlashdata('success', lang('DF_Messages.messages.flashData.userRequest.newPass'));
                             return redirect()->to('/users/login');
                         } catch (ReflectionException $e) {
-                            throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.newPassFail'));
+                            echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.newPassFail')]);
                         }
                     } else {
-                        throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.newPassFail'));
+                        echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.newPassFail')]);
                     }
                 } else {
                     try {
                         session()->setFlashdata('success', lang('DF_Messages.messages.flashData.userRequest.newPassFail'));
                         return redirect()->to('/users/login');
                     } catch (ReflectionException $e) {
-                        throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.newPassFail'));
+                        echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.newPassFail')]);
                     }
                 }
 
@@ -159,7 +159,7 @@ class UserRequest extends User
                 }
                 return redirect()->to('/dashboard');
             } else {
-                throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.activationCodeRefused'));
+                echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.activationCodeRefused')]);
             }
         }
     }
@@ -190,13 +190,13 @@ class UserRequest extends User
                                 session()->setFlashdata('success', lang('DF_Messages.messages.flashData.userRequest.afterRegisterForMailActivation'));
                                 return redirect()->to('/users/login');
                             } catch (ReflectionException $e) {
-                                throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.registerFail'));
+                                echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.registerFail')]);
                             }
                         } else {
-                            throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.registerFail'));
+                            echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.registerFail')]);
                         }
                     } else {
-                        throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.activationEndPointFail'));
+                        echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.activationEndPointFail')]);
                     }
                 } else {
                     // Eğer aktivasyon sistemi tanımlanmadıysa veya aktif değilse sadece girişe yönlendirilecektir.
@@ -205,7 +205,7 @@ class UserRequest extends User
                         session()->setFlashdata('success', lang('DF_Messages.messages.flashData.userRequest.succesWithoutActivation'));
                         return redirect()->to('/users/login');
                     } catch (ReflectionException $e) {
-                        throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.registerFail'));
+                        echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.registerFail')]);
                     }
                 }
 
@@ -238,7 +238,7 @@ class UserRequest extends User
                     session()->setFlashdata('success', lang('DF_Messages.messages.flashData.userRequest.successRecord'));
                     return redirect()->to('/users/profile');
                 } else {
-                    throw PageNotFoundException::forPageNotFound($message = lang('DF_Messages.messages.HTTP.userRequest.registerFail'));
+                    echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userRequest.registerFail')]);
                 }
             }
         }

@@ -29,6 +29,10 @@ return [
             'userLogic'=>[
                 'serverProblem' => 'There is a server based problem.',
             ],
+            'errors'=>[
+                'title' =>'Whoopss',
+                'message'=>'We seem to have hit a snag... {pageroute}',
+            ]
         ],
         'SMTP' => [
             'userRequest' => [

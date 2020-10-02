@@ -186,7 +186,7 @@ class Page extends BaseController implements Pages
         if ($publicContent !== false) {
             return $this->dynamicViewer->publicContent($publicContent);
         } else {
-           throw PageNotFoundException::forPageNotFound($messaga = 'Not Find');
+           throw PageNotFoundException::forPageNotFound($message = 'Not Find');
         }
     }
 

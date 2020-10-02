@@ -79,7 +79,7 @@ class UserLogic extends BaseController
             }
             return true;
         } catch (\Exception $e) {
-            throw PageNotFoundException::forPageNotFound($message = lang('DF_Mesagges.messages.HTTP.userLogic.serverProblem'));
+            echo view('errors/html/error_404',['message' => lang('DF_Messages.messages.HTTP.userLogic.serverProblem')]);
         }
 
     }

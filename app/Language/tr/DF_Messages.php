@@ -29,6 +29,10 @@ return [
             'userLogic'=>[
                 'serverProblem'=>'Sunucu tabanlı bir problem yaşanıyor.',
             ],
+            'errors'=>[
+                'title' =>'Hoopss',
+                'message'=>'birşeyler ters gitti.. {pageroute}'
+            ]
         ],
         'SMTP' => [
             'userRequest' => [
