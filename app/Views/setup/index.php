@@ -7,7 +7,7 @@ echo '
 </head>';
 $sideTitle = !empty(getenv('SITE_NAME')) ? getenv('SITE_NAME') : lang('View.setup.index.sideTitle');
 echo '<body class="bg-light">';
-echo '<link href="/public/assets/css/bootstrap/bootstrap.4.5.min.css" rel="stylesheet" type="text/css" />';
+echo '<link href="public/assets/css/bootstrap/bootstrap.4.5.min.css" rel="stylesheet" type="text/css" />';
 echo '<nav  class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 <a class="navbar-brand text-center">' . $sideTitle . '</a>
 <div class="collapse navbar-collapse" id="navbarsExample07"><ul class="navbar-nav mr-auto">
