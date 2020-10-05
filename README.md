@@ -94,6 +94,7 @@ offers useful features .._**
 
 ## Installation
 # NOTE : if you are using Cachewall or similar system then turn it off for this system
+# NOTE 2 : DO NOT INSTALL TO SUBFOLDERS
 
 ##### Required
 - Run on your server and start installation (etc. enter localhost on your browser) and enter required.
