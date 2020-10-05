@@ -1,6 +1,6 @@
-<script src="public/assets/js/jquery/jquery-3.5.1.min.js" type="text/javascript"></script>
+<script src="/public/assets/js/jquery/jquery-3.5.1.min.js" type="text/javascript"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="public/assets/js/ajax/axios_dist_axios.js" type="text/javascript"></script>
+<script src="/public/assets/js/ajax/axios_dist_axios.js" type="text/javascript"></script>
 <script>
     function lgLogic(lg, num) {
         if (num === 1 && lg == 'tr') {
