@@ -160,7 +160,7 @@ class Sitemap extends BaseController
                         ->select(['created_at', 'updated_at as lastmod', 'slug as loc'])->distinct(true)
                         ->where('YEAR(`created_at`)', $key)
                         ->where('MONTH(`created_at`)', $subValue['createdAtMonth'])
-                        ->orderBy('created_at', 'DESC')
+                        ->orderBy('lastmod', 'DESC')
                         ->limit(1)
                         ->getWhere()
                         ->getResultArray()[0];
@@ -172,7 +172,7 @@ class Sitemap extends BaseController
                         ->select(['created_at,updated_at as lastmod,slug as loc'])->distinct(true)
                         ->where('YEAR(`created_at`)', $key)
                         ->where('MONTH(`created_at`)', $value)
-                        ->orderBy('created_at', 'DESC')
+                        ->orderBy('lastmod', 'DESC')
                         ->limit(1)
                         ->getWhere()
                         ->getResultArray()[0];
