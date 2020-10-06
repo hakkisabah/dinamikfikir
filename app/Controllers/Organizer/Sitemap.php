@@ -132,10 +132,9 @@ class Sitemap extends BaseController
         }
     }
 
-    private function yearWithMonths($createdAtYear,$Content)
+    private function yearWithMonths($createdAtYear, $Content)
     {
         $createdAtYearMonths = [];
-
         // $createdAtYear dizisinde bulunan yıllara ait içerikleri ay bazında çağırıyoruz
         // ve ayları azalan şekilde sıralıyoruz..
         foreach ($createdAtYear as $value) {
@@ -150,33 +149,54 @@ class Sitemap extends BaseController
         return $createdAtYearMonths;
     }
 
-    private function sitemapResult($createdAtYearMonths,$Content)
+    private function maxDetection($Content, $key, $value)
+    {
+        $createdTemp = $Content->selectMax('created_at')
+            ->where('YEAR(`created_at`)', $key)
+            ->where('MONTH(`created_at`)', $value['createdAtMonth'])
+            ->getWhere()
+            ->getResultArray()[0];
+        $updatedemp = $Content->selectMax('updated_at')
+            ->where('YEAR(`created_at`)', $key)
+            ->where('MONTH(`created_at`)', $value['createdAtMonth'])
+            ->getWhere()
+            ->getResultArray()[0];
+        $tempkey = [];
+        if ($createdTemp['created_at'] < $updatedemp['updated_at']) {
+            $tempkey['updated_at'] = $updatedemp['updated_at'];
+        } else {
+            $tempkey['created_at'] = $createdTemp['created_at'];
+        }
+        return $tempkey;
+    }
+
+    private function sitemapResult($createdAtYearMonths, $Content)
     {
         $sitemapResult = [];
         foreach ($createdAtYearMonths as $key => $value) {
             if (is_array($value)) {
                 foreach ($value as $subKey => $subValue) {
+                    // maxDetection bize en son güncellenen içeriği oluşturma tarihi veya güncelleme tarihi olarak
+                    // geri döndürmekte ve bu döndürülen değer tempkey değişkenine bir dizi olarak aktarılmakta
+                    // $key yıla denk gelmekte $subValue veya $value ise ay a denk gelmektedir.
+                    $tempkey = $this->maxDetection($Content, $key, $subValue);
                     $sitemapResult[$key][$subValue['createdAtMonth']] = $Content
-                        ->select(['created_at', 'updated_at as lastmod', 'slug as loc'])->distinct(true)
-                        ->where('YEAR(`created_at`)', $key)
-                        ->where('MONTH(`created_at`)', $subValue['createdAtMonth'])
-                        ->orderBy('lastmod', 'DESC')
-                        ->limit(1)
+                        ->select(['created_at', 'updated_at as lastmod', 'slug as loc'])
+                        // array_keys($tempkey)[0] ile maxDetection ile tespit edilen en güncel kolon adını alıyoruz
+                        // aynı zamanda bu kolon adı ile değeri alıp eşleştirmede kullanıyoruz
+                        ->where(array_keys($tempkey)[0], $tempkey[array_keys($tempkey)[0]])
                         ->getWhere()
                         ->getResultArray()[0];
                 }
 
             } else {
-                foreach ($value as $subKey => $subValue) {
-                    $sitemapResult[$key][$value] = $Content
-                        ->select(['created_at,updated_at as lastmod,slug as loc'])->distinct(true)
-                        ->where('YEAR(`created_at`)', $key)
-                        ->where('MONTH(`created_at`)', $value)
-                        ->orderBy('lastmod', 'DESC')
-                        ->limit(1)
-                        ->getWhere()
-                        ->getResultArray()[0];
-                }
+                // Eğer bir dizi değilse burası çalışacaktır.
+                $tempkey = $this->maxDetection($Content, $key, $value);
+                $sitemapResult[$key][$value['createdAtMonth']] = $Content
+                    ->select(['created_at', 'updated_at as lastmod', 'slug as loc'])
+                    ->where(array_keys($tempkey)[0], $tempkey[array_keys($tempkey)[0]])
+                    ->getWhere()
+                    ->getResultArray()[0];
             }
         }
         return $sitemapResult;
@@ -195,8 +215,8 @@ class Sitemap extends BaseController
             ->orderBy('createdAt', 'DESC')
             ->get($this->queryLimitsOrganizer->sitemapLimit)
             ->getResultArray();
-        $createdAtYearMonths = $this->yearWithMonths($createdAtYear,$Content);
-        $sitemapResult = $this->sitemapResult($createdAtYearMonths,$Content);
+        $createdAtYearMonths = $this->yearWithMonths($createdAtYear, $Content);
+        $sitemapResult = $this->sitemapResult($createdAtYearMonths, $Content);
         $db->close();
         $result = $this->mapResolver($sitemapResult);
         $XMLOutput = $this->XMLGenerator();
