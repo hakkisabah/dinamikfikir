@@ -52,6 +52,7 @@ Ayrıca [Dinamikfikir Cms Twitter](https://twitter.com/dinamikfikir) bağlantıs
 
 ## Sunucu gereksinimleri
 
+İşletim Sistemi : Linux
 
 Aşağıdaki uzantıların kurulu olduğu PHP sürüm 7.2 veya üstü gereklidir:
 
@@ -155,6 +156,7 @@ and you can follow all commits from [Dinamikfikir Cms Twitter](https://twitter.c
 
 ## Server requirements
 
+Operation System : Linux
 
 PHP version 7.2 or higher is required, with the following extensions installed:
 
