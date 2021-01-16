@@ -2,7 +2,7 @@
 echo '</main>
                            <footer class="text-muted text-center">
                            <div class="container">
-                           <p>&copy; 2020</p>
+                           <p>&copy; 2021</p>
                            <p><a href="' . 'https://github.com/hakkisabah/dinamikfikir' /*$footerIndex['footer']['baseUrl'] */. '">' . 'DinamikFikir' /*$footerIndex['footer']['SITE_NAME']*/ . '</a></p>
                            <p>Developed by <a href="http://www.hakkisabah.com" target="_blank">Hakkı SABAH</a> with <a href="http://codeigniter.com" target="_blank">@CodeIgniter 4.x</a></p>
                            </div>
