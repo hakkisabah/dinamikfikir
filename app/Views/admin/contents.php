@@ -60,7 +60,7 @@
                 contentDetailForm.elements.namedItem(key).setAttribute('value', searchedContent[e.value][key])
             }
         })
-        userIconElement.src = '<?php echo $admin_contents_data['currentBase']; ?>' + '/public/assets/svg/UserIcon/' + userIconHiddenElement.value
+        userIconElement.src = '<?php echo $admin_contents_data['currentBase']; ?>' + 'public/assets/svg/UserIcon/' + userIconHiddenElement.value
         userIconElement.setAttribute('class',userIconElement.getAttribute('class').replace('',' show '))
         searchContent.value = e.textContent
 
