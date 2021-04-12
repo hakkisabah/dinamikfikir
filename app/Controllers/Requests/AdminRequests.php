@@ -109,15 +109,20 @@ class AdminRequests extends BaseController
             foreach ($validatonLogic as $key => $value) {
                 $newData[$key] = $value;
             }
-            if (session()->get('userInfo')['role'] != 'admin') {
+            $userM = new User();
+            $isAdmin = $userM->getAccount($newData['user_name'],'getUserInfoByName');
+            if (session()->get('userInfo')['role'] == 'admin' && $isAdmin['role'] !== 'admin') {
                 if (count($newData) > 1) {
-                    $userM = new User();
                     return $this->response->setStatusCode(200)->setJson(['updatedUser' => $userM->updateAccount($newData)]);
                 } else {
                     return $this->response->setStatusCode(200)->setJson(['updatedUser' => lang('DF_Validation.errors.admin_control.panel.user_panel.noProcess')]);
                 }
             } else {
-                return $this->response->setStatusCode(200)->setJson(['updatedUser' => lang('DF_Validation.errors.admin_control.panel.user_panel.adminNotUpdateExternally')]);
+                if ($isAdmin['role'] === 'admin'){
+                    return $this->response->setStatusCode(200)->setJson(['updatedUser' => lang('DF_Validation.errors.admin_control.panel.user_panel.adminNotUpdateExternally')]);
+                }else{
+                    return $this->response->setStatusCode(403)->setJSON(['updateUser' => lang('DF_Messages.messages.HTTP.errors.title')]);
+                }
 
             }
 
