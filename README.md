@@ -14,6 +14,10 @@ note: the introduction will be in Turkish and English, you can read the explanat
 Mental olarak özgüvenimi pozitif olarak etkileyen  [Bülent BATMAZ](https://akademik.anadolu.edu.tr/bbatmaz) ve [Burak ÇAKIR](https://avesis.kocaeli.edu.tr/burak) hocalarıma teşekkürü bir borç bilirim.
 
 ##
+# NOTE : 
+
+## [EN] : dinamikfikir.com domain currently down and unreleased unfortunately. Also dinamikfikir can't get update because of busy  time.
+## [TR] : dinamikfikir.com alan adı şu an hizmet veremiyor ve ne yazıkki kullanılmamak üzere serbest bırakıldı. Ayrıca yoğunluktan dolayı güncelleme de yapılamıyor.
 
 [Jump Section 2](#section-2)
 
